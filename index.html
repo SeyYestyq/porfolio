@@ -100,6 +100,25 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(120, 255, 214, 0.2);
         }
+
+        /* Mobile Performance Optimizations */
+        @media (max-width: 768px) {
+            .noise-overlay, .map-bg {
+                display: none !important; /* Disable expensive SVG and mask on mobile */
+            }
+            .glass-card, .glass-card-light {
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+            .hero-gradient {
+                animation: none; /* Disable expensive background animation */
+                background-position: 0% 50%;
+            }
+            .blur-[100px], .blur-[110px], .blur-[80px] {
+                filter: blur(40px); /* Reduce blur radius for performance */
+                opacity: 0.1;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-[#78ffd6] selection:text-dark">
@@ -153,10 +172,10 @@
                             </span>
                             AI Automation Developer
                         </div>
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+                        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
                             Автоматизирую <br>бизнес с помощью <span class="text-emerald-900">ИИ</span>.
                         </h1>
-                        <p class="text-lg sm:text-xl text-dark/80 mb-10 max-w-lg font-medium">
+                        <p class="text-base sm:text-lg lg:text-xl text-dark/80 mb-10 max-w-lg font-medium">
                             Разрабатываю прикладные решения, агентов и интеграции для избавления от рутины. Python, FastAPI, LLM & RAG.
                         </p>
                         
@@ -224,8 +243,8 @@
 
                 <!-- Technologies Ticker (Bottom of Hero) -->
                 <div class="absolute bottom-0 left-0 w-full glass-card !bg-dark/40 !border-0 py-4 overflow-hidden border-t border-white/10 rounded-b-[40px]">
-                    <div class="flex w-[200%] animate-[slide_20s_linear_infinite] opacity-70">
-                        <div class="flex w-1/2 justify-around items-center text-sm font-bold text-dark/70 tracking-wider">
+                    <div class="flex w-max animate-[slide_20s_linear_infinite] opacity-70 gap-8 pr-8" style="will-change: transform;">
+                        <div class="flex items-center gap-8 text-sm font-bold text-dark/70 tracking-wider whitespace-nowrap">
                             <span>PYTHON</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                             <span>FASTAPI</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                             <span>LANGGRAPH</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
@@ -233,7 +252,7 @@
                             <span>DOCKER</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                             <span>REACT</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                         </div>
-                        <div class="flex w-1/2 justify-around items-center text-sm font-bold text-dark/70 tracking-wider">
+                        <div class="flex items-center gap-8 text-sm font-bold text-dark/70 tracking-wider whitespace-nowrap">
                             <span>PYTHON</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                             <span>FASTAPI</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
                             <span>LANGGRAPH</span> <span class="w-1.5 h-1.5 rounded-full bg-dark/30"></span>
@@ -244,8 +263,8 @@
                     </div>
                     <style>
                         @keyframes slide {
-                            0% { transform: translateX(0); }
-                            100% { transform: translateX(-50%); }
+                            0% { transform: translate3d(0, 0, 0); }
+                            100% { transform: translate3d(-50%, 0, 0); }
                         }
                     </style>
                 </div>
